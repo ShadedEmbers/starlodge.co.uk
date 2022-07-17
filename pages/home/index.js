@@ -1,10 +1,15 @@
-import { Box, Typography, Button, Stack } from '@mui/material';
-import { QuestionAnswer } from '@mui/icons-material';
-import Link from 'next/link';
+import { Box, Typography, Button } from '@mui/material';
 import { FAQ, MapCard } from '../../components';
 import questions from '../../faqs.json';
 
 const Home = () => {
+
+  const scrollToId = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <Box
