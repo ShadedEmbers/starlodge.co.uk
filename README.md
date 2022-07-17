@@ -1,34 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a community project for [StarLodge, Horwich](https://www.google.com/maps/place/Horwich/@53.5969797,-2.5648971,17z/data=!3m1!4b1!4m5!3m4!1s0x487b0915c98de8fb:0xb784f6ea6e975a2b!8m2!3d53.5969097!4d-2.5628628). If you'd like to contribute open a Pull Request in this format: `SL/feature-name` and provide a description on the feature you'd like to contribute.
 
-## Getting Started
+# starlodge.co.uk
 
-First, run the development server:
+### setup
+To setup the project for your local environment clone this repo and checkout to the `dev` branch. <br />
+All Pull Requests should originate from the `dev` branch and touch the least amount of existing files possible. 
 
-```bash
-npm run dev
-# or
-yarn dev
+You Will also need a `.env.local` file which should be configured as follows:
+```
+NEXT_PUBLIC_MAPBOX_GL_ACCESS_TOKEN=your_mapbox_api_key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The live deployment has it's own API keys so no need to worry about your account being charged.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### contributing
+This repo uses the following structure for new components:
+```
+- src
+  - components
+   - componentName
+    - componentName.js
+    - componentName.test.js (optional but preferred)
+    - index.js
+    
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Your `index.js` file should export an object with your component in a shorthand format e.g: 
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```js
+import { ComponentName } from './ComponentName';
 
-## Learn More
+export {
+  ComponentName,
 
-To learn more about Next.js, take a look at the following resources:
+};
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+For a `Page` you will need to follow this structure:
+```md
+- src
+  - pages
+    - pageName
+      - index.js
 
-## Deploy on Vercel
+```
+Your pageName is will be the slug to the root you want to create. Your Page component should also be the default export of your `index.js`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
