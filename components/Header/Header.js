@@ -5,11 +5,9 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemButton,
   ListItemText,
   Toolbar,
   Typography,
-  Button,
   IconButton,
 } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
@@ -19,15 +17,17 @@ import Link from 'next/link';
 export const navLinks = [
   { label: 'Home', value: 'home' },
   { label: 'FAQs', value: 'faqs' },
+  // { label: 'Wildlife', value: 'wildlife' },
+  { label: 'Contribute', value: 'contributing' },
 ];
 
-const menuLabel = 'Menu';
+const menuLabel = 'STAR LODGE';
  
 export const Header = () => {
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const handleDrawerToggle = () => {
-    setDrawerOpen(state => !state);
+    setDrawerOpen(!drawerOpen);
   };
 
   const [container, setContainer] = useState(null);
@@ -35,35 +35,74 @@ export const Header = () => {
     setContainer(window !== undefined ? () => document.body : undefined);
   }, [ ]);
 
+  const scrollToId = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar 
         component={'nav'}
-        position={'static'}
+        position={'fixed'}
+        sx={{
+          backgroundColor: '#F1F1F1',
+          padding: '10px 0',
+          '&.MuiPaper-root': {
+            alignItems: 'flex-end',
+            maxWidth: '800px',
+            margin: '0 auto',
+          },
+        }}
+        elevation={0}
       >
-        <Toolbar>
+        <Toolbar
+          sx={{
+            maxWidth: '800px',
+            display: 'flex',
+            justifyContent: {
+              xs: 'flex-end',
+              md: 'center',
+            },
+            padding: '0 !important',
+            width: '100%',
+          }}
+          disableGutters
+        >
           <IconButton
-            color='inherit'
+            sx={{
+              color: 'text.primary',
+              mr: 2, 
+              display: { sm: 'none' }
+            }}
             aria-label='open drawer'
             edge='start'
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6'
-            component={'div'}
-            sx={{ flex: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            { menuLabel }
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '20px' } }}>
             { navLinks.map(({ label, value }) => (
-              <Link key={`d-link-${value}`} href={`/${value}`} >
-                <Button sx={{ color: 'white' }} >
+              // <Link key={`d-link-${value}`} href={`/${value}`} >
+                <Typography 
+                  key={`d-link-${value}`}
+                  onClick={() => scrollToId(value)}
+                  sx={{
+                    color: 'text.primary',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    '&:hover': {
+                      color: 'primary.main',
+                    },
+                    padding: '0 20px'
+                  }}
+                >
                   { label }
-                </Button>
-              </Link>
+                </Typography>
+              // </Link>
             ))}
           </Box>
         </Toolbar>
@@ -83,7 +122,7 @@ export const Header = () => {
           }}
         >
           <SideMenu 
-            onToggle={handleDrawerToggle}
+            onToggle={scrollToId}
           />
         </Drawer>
       </Box>
@@ -92,11 +131,13 @@ export const Header = () => {
 };
 
 const SideMenu = ({ onToggle }) => {
-  const handleToggle = () => {
+  const handleToggle = (id) => {
     if (!onToggle) {
       return;
     }
-    onToggle();
+    if (typeof id === 'string') {
+      onToggle(id);
+    }
   }
 
   return (
@@ -110,13 +151,19 @@ const SideMenu = ({ onToggle }) => {
       <Divider />
       <List>
         { navLinks.map(({ label, value }) => (
-          <Link key={`m-link-${value}`} href={`/${value}`} >
-            <ListItem button>
-              <ListItemText primary={label} />
+          // <Link  href={`/${value}`} >
+            <ListItem key={`m-link-${value}`}
+              onClick={() => handleToggle(value)}
+            >
+              <ListItemText primary={label} 
+                sx={{
+                  cursor: 'pointer',
+                }}
+              />
             </ListItem>
-          </Link>
+          // </Link>
         ))}
       </List>
     </Box>
   )
-}
+};

@@ -4,13 +4,17 @@ export const muiTheme = createTheme({
   palette: {
     type: 'light',
     primary: {
-      main: '#3F51B5',
+      main: '#007afc',
     },
     secondary: {
       main: '#00BCD4',
     },
     text: {
-      primary: '#1B1B1D',
+      primary: '#363638',
     },
   },
+  typography: {
+    fontFamily: 'Noto Sans, sans-serif',
+  }
+
 });
