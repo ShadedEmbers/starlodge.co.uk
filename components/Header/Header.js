@@ -48,7 +48,7 @@ export const Header = () => {
         component={'nav'}
         position={'fixed'}
         sx={{
-          backgroundColor: '#F1F1F1',
+          backgroundColor: 'rgba(0, 0, 0, 0)',
           padding: '10px 0',
           '&.MuiPaper-root': {
             alignItems: 'flex-end',
