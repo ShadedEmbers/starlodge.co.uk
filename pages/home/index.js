@@ -64,8 +64,9 @@ const Home = () => {
             to a range of wildlife. 
           </Typography>
           
-          <Link href='/faqs'>
+          {/* <Link href='/faqs'> */}
             <Button
+              onClick={() => scrollToId('faqs')}
               variant='contained'
               disableRipple
               sx={{
@@ -79,7 +80,7 @@ const Home = () => {
             >
               Read FAQs
             </Button>
-          </Link>
+          {/* </Link> */}
       </Box>
 
       <MapCard />
